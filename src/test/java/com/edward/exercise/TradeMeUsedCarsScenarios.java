@@ -19,8 +19,8 @@ public class TradeMeUsedCarsScenarios {
 
     // This scenario checks that the brand ‘Kia’ exists and return the current number of Kia cars listed.
     // The method checkCarBrandExists() has two variables;
-    // carBrand = name of car brand to be verified
-    // carExists = <true> if to check if it exists, <false> otherwise
+    // -carBrand = name of car brand to be verified
+    // -carExists = <true> if to check if it exists, <false> otherwise
     @Test
     public void checkCarExists() {
         BaseTestAPI baseTestAPI = new BaseTestAPI();
@@ -29,10 +29,10 @@ public class TradeMeUsedCarsScenarios {
 
     // This scenario checks that the brand ‘Hispano Suiza’ does not exist.
     // The method checkCarBrandExists() has two variables;
-    // carBrand = name of car brand to be verified
-    // carExists = <true> if to check if it exists, <false> otherwise
+    // -carBrand = name of car brand to be verified
+    // -carExists = <true> if to check if it exists, <false> otherwise
     @Test
-    public void checkHispanoSuizaDoesntExist() {
+    public void checkCarDoesntExist() {
         BaseTestAPI baseTestAPI = new BaseTestAPI();
         baseTestAPI.checkCarBrandExists("Hispano Suiza", false);
     }

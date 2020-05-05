@@ -6,6 +6,9 @@ import com.google.gson.JsonParser;
 import io.restassured.response.Response;
 import org.junit.Assert;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static io.restassured.RestAssured.get;
 
 public class BaseTestAPI {
@@ -34,12 +37,6 @@ public class BaseTestAPI {
             carBrandCount--;
         }
         System.out.println("The total number of car brands under used cars is: " + carBrandCount);
-
-    }
-
-    // This method lists out the names of car brands.
-    public void requestListOfNamedBrands() {
-
     }
 
     // This method checks if the car identified exists on the list.
@@ -76,6 +73,19 @@ public class BaseTestAPI {
 
     // This method counts the number of cars listed based on the selected brand.
     private void checkCountOfCarListed(String carBrand) {
-        System.out.println("and there are " + "" + " number of stocks left for this brand.");
+        Pattern pattern = Pattern.compile("(?<=" + carBrand + ")(.*?)(?=HasClassifieds)", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(buildRequestAdd);
+        if (matcher.find()) {
+            String trimmedMatch = matcher.group();
+            Pattern patternInsideText = Pattern.compile("(?<=Count\":)(.*?)(?=,\")", Pattern.DOTALL);
+            Matcher matcherInsideText = patternInsideText.matcher(trimmedMatch);
+            if (matcherInsideText.find()) {
+                System.out.println("and there are (" + matcherInsideText.group() + ") number of stocks left for this brand.");
+            } else {
+                System.out.println("The number of stocks is not available!");
+            }
+        } else {
+            System.out.println("Cannot find string match!");
+        }
     }
 }
