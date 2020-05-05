@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class BaseTest {
+public class BaseTestWeb {
     private WebDriver driver;
 
     @BeforeClass
@@ -20,8 +20,9 @@ public class BaseTest {
     public void setupTest() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.navigate().to("https://www.tmsandbox.co.nz/");
-        Assert.assertTrue("You are redirected to a page with Page Title" + driver.getTitle(), driver.getTitle().startsWith("TRADEME SANDBOX"));
+        driver.navigate().to("https://www.tmsandbox123.co.nz/");
+        Assert.assertTrue("You are redirected to a different page, with Page Title "
+                + driver.getTitle() + "\n" + "Expected: TRADEME SANDBOX", driver.getTitle().startsWith("TRADEME SANDBOX"));
     }
 
     @After
